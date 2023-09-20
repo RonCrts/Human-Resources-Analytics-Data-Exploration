@@ -115,23 +115,3 @@ ORDER BY average_salary DESC;
 data = c.fetchall()
 df = pd.DataFrame(data, columns=['job_title', 'average_salary'])
 st.dataframe(df)
-st.subheader("6. Display the total salary cost for each department, including the department that has no employee. Order the output from the highest to the lowest salary cost.")
-st.code("""
-SELECT department_name, SUM(salary) AS total_salary_cost
-FROM employees e
-RIGHT JOIN departments d
-ON e.department_id = d.department_id
-GROUP BY department_name
-ORDER BY total_salary_cost DESC;
-""", language='sql')
-c.execute("""
-SELECT department_name, SUM(salary) AS total_salary_cost
-FROM employees e
-RIGHT JOIN departments d
-ON e.department_id = d.department_id
-GROUP BY department_name
-ORDER BY total_salary_cost DESC;
-""")
-data = c.fetchall()
-df = pd.DataFrame(data, columns=['department_name', 'total_salary_cost'])
-st.dataframe(df)
